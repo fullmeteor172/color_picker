@@ -2,4 +2,4 @@ Project1.exe
 Project1.ilk
 Project1.pdb
 .vs/
-.suo/
+*.suo
