@@ -6,13 +6,13 @@ int GuiStart();  //Initializes the window
 int DrawGradient();
 
 
-static const int SCALE_SCREEN;
-static const int SCREEN_HEIGHT;
-static const int SCREEN_WIDTH;
+static const int SCALE_SCREEN = 1;
+static const int SCREEN_HEIGHT=500*SCALE_SCREEN;
+static const int SCREEN_WIDTH = 750*SCALE_SCREEN;
 
 int DrawGradient()
 {
-
+    return 0;
 }
 
 int GuiStart()
@@ -29,7 +29,7 @@ int GuiStart()
         DrawGradient();
         EndDrawing();
     }
-
+    return 0;
 }
 
 int main()
