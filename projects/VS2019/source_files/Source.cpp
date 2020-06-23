@@ -3,12 +3,16 @@
 using namespace std;
 
 int GuiStart();  //Initializes the window
-int  DrawSlider();
+int  DrawSliderGradient(); //Draws the rainbow strip
+int DrawSlider(); //Draws the sliding circle
+int DrawBoxGradient(); //Draws the square gradient box
 
 
-static const int SCALE_SCREEN = 1;
-static const int SCREEN_HEIGHT=500*SCALE_SCREEN;
-static const int SCREEN_WIDTH = 750*SCALE_SCREEN;
+static const int screenHeight = 306; //10px padding on both
+static const int screenWidth = 500;
+int sliderY = screenHeight / 2;
+int sliderGradientWidth = 25;
+float sliderRadius=8; //Radius of the sliding circle
 
 Color sliderAt = { 255,0,0,255 };
 
@@ -36,38 +40,46 @@ Color ColorAt(int pos) //Returns RGB Value for the strip at that position
     return printColor;
 }
 
-int DrawSlider()
+int DrawSliderGradient()
 {
     for (int i = 0; i < 306; i++) //Lenth of the strip: 306px
     {
         Color printColor = ColorAt(i);
-        for (int j = 0; j < 20; j++) //Width of the strip: 20px
+        for (int j = 0; j < sliderGradientWidth; j++) //Width of the strip: 25px
         {
-            DrawPixel(j, i, printColor);
+            DrawPixel(j+306, i, printColor);
         }
     }
     return 0;
 }
 
-/*
-int DrawGradient(Color sliderColor)
+int DrawSlider()
 {
-    Color transparent = { 0,0,0,0 };
-    DrawRectangleGradientH(0,0,255,255, WHITE, sliderColor);
-    DrawRectangleGradientV(0, 0, 255, 255, transparent, BLACK);
+    DrawCircle(306 + sliderGradientWidth / 2, sliderY, sliderRadius, ColorAt(sliderY));
+    DrawCircleLines(306 + sliderGradientWidth / 2, sliderY, sliderRadius, WHITE);
     return 0;
 }
-*/
+
+int DrawBoxGradient()
+{
+    Color transparent = { 0,0,0,0 };
+    DrawRectangleGradientH(0,0,306,306, WHITE, sliderAt);
+    DrawRectangleGradientV(0, 0, 306, 306, transparent, BLACK);
+    return 0;
+}
+
 int GuiStart()
 {
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Color Picker");
+    InitWindow(screenWidth, screenHeight, "Color Picker");
     SetTargetFPS(60);
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(WHITE);
+        DrawSliderGradient();
         DrawSlider();
+        DrawBoxGradient();
         EndDrawing();
     }
     return 0;
