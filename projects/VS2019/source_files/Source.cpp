@@ -6,6 +6,7 @@ int GuiStart();                         //Initializes the window
 int  DrawSliderGradient();              //Draws the rainbow strip
 int DrawSlider();                       //Draws the sliding circle
 int DrawBoxGradient();                  //Draws the square gradient box
+int DrawViewBox();
 Color SliderColorAt(int pos);           //Returns the color at posY of slider
 Color BoxColorAt(int posX, int posY);   //Returns pixel color for the gradient box at x,y
 
@@ -21,6 +22,13 @@ int mouseX;
 int mouseY;
 Color sliderAt;
 Color boxAt;
+
+int DrawViewBox()
+{
+    DrawRectangle(306 + sliderGradientWidth, 0, screenWidth - (306 + sliderGradientWidth), 50, BoxColorAt(selectorX, selectorY));
+    DrawText("Alpha V0.1", 311 + sliderGradientWidth, 55, 20, SliderColorAt(sliderY));
+    return 0;
+}
 
 int Map(int x, int inMin, int inMax, int outMin, int outMax)
 {
@@ -144,6 +152,7 @@ int GuiStart()
         DrawSlider();
         DrawBoxGradient();
         DrawBoxSelector();
+        DrawViewBox();
         EndDrawing();
     }
     return 0;
