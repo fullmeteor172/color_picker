@@ -25,6 +25,7 @@ Color sliderAt;
 Color boxAt;
 Color bgGrey = { 54,54,54,255 };
 
+
 int DrawText()
 {
     int r = (int)BoxColorAt(selectorX - 20, selectorY - 20).r;
@@ -39,6 +40,20 @@ int DrawViewBox()
 {
     DrawRectangle(346 + sliderGradientWidth+20, 20, screenWidth -(346 + sliderGradientWidth + 20 )-20, 50, BoxColorAt(selectorX-20, selectorY-20));
     DrawRectangleLines(344 + sliderGradientWidth + 20, 18, screenWidth - (346 + sliderGradientWidth + 20) - 16, 54, DARKGRAY);
+    
+    int cell = 0; //Fuck knows what this var does but we need it.
+
+    
+    if (IsMouseButtonDown(cell))
+    {
+        mouseX = GetMouseX();
+        mouseY = GetMouseY();
+    }
+    //Bounds checking
+    if (mouseX > 346 + sliderGradientWidth + 20 && mouseX < (346 + sliderGradientWidth + 20) + screenWidth - (346 + sliderGradientWidth + 20) - 20 && mouseY > 20 && mouseY < 70)
+    {
+        SetClipboardText(TextFormat("%i, %i, %i",BoxColorAt(selectorX - 20, selectorY - 20).r, BoxColorAt(selectorX - 20, selectorY - 20).g, BoxColorAt(selectorX - 20, selectorY - 20).b));
+    }
     return 0;
 }
 
